@@ -5,16 +5,20 @@ import json
 base = os.path.dirname(os.path.abspath(__file__))+'/'
 with open(base + 'acc.txt') as f:
     acc = f.read().strip()
-headers = {'Authorization':'Bearer ' + acc}
+headers = {'Authorization' : 'Bearer ' + acc}
+params = {'limit' : 2}
 instance = 'https://twingyeo.kr'
 
 uri = instance + '/api/v1/timelines/home'
-timeline = requests.get(uri, headers = headers)
+timeline = requests.get(uri, headers = headers, params = params)
+for t in timeline.iter_lines(): # 왜 되지????
+    dec = t.decode('utf-8')
+    break
 
-print(timeline.text)
+dec = dec.strip('[]')
+newdec = json.loads(dec) # limit 2 이상이면 작동안함, 왜 안 돼
+print(newdec)
 
-# status = json.dumps(timeline.text)
-# print(status)
-
-# for t in timeline:
-#     status = json.dumps(t.text)
+# dec = dict(dec)
+# print(dec)
+# print(type(dec))
