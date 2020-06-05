@@ -6,19 +6,28 @@ base = os.path.dirname(os.path.abspath(__file__))+'/'
 with open(base + 'acc.txt') as f:
     acc = f.read().strip()
 headers = {'Authorization' : 'Bearer ' + acc}
-params = {'limit' : 2}
+params = {'limit' : 3} # 40까지만 먹네?
 instance = 'https://twingyeo.kr'
 
+def initial(dic, statdict):
+    member = statdict['account']['username']
+    dic[member] = 1
+
+def update(dic, statdict):
+    member = statdict['account']['username']
+    count = int(dic.get(member))
+    dic.update({member : count + 1})
+
 uri = instance + '/api/v1/timelines/home'
-timeline = requests.get(uri, headers = headers, params = params)
-for t in timeline.iter_lines(): # 왜 되지????
-    dec = t.decode('utf-8')
-    break
-
-dec = dec.strip('[]')
-newdec = json.loads(dec) # limit 2 이상이면 작동안함, 왜 안 돼
-print(newdec)
-
-# dec = dict(dec)
-# print(dec)
-# print(type(dec))
+timeline = requests.get(uri, headers = headers, params = params).json()
+d = dict()
+for i in range(len(timeline)):
+    status = timeline[i]
+    if status['reblog'] is None:
+        if status['account']['username'] in d:
+            update(d, status)
+        else:
+            initial(d, status)
+    else:
+        pass
+print(d)
