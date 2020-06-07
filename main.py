@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import time
 
 base = os.path.dirname(os.path.abspath(__file__))+'/'
 with open(base + 'acc.txt') as f:
@@ -13,6 +14,7 @@ def toot(message):
     t = dict()
     t['status'] = message
     t['visibility'] = 'unlisted'
+    t['spoiler_text'] = '타임라인 지분 측정기'
     requests.post(instance + '/api/v1/statuses', headers = headers, data = t)
 
 def initial(dic, statdict):
@@ -51,9 +53,12 @@ for j in range(len(d)):
     sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
     msg.append(sentence)
 
-message = 'solini 님의 탐라 비율입니다. \n\n'
+message = ''
 for k in range(len(msg)):
     append = msg[k] + '\n'
     message += append
+
+time = time.strftime('%H:%M', time.localtime(time.time()))
+message += '\n' + str(time) + '(KST) 기준 최근 40툿을 대상으로 측정합니다.'
 
 toot(message)
