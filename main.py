@@ -38,14 +38,21 @@ def fetch_and_toot(instance):
         else:
             pass
 
+    sort = sorted(d.items(), key = lambda k : k[1], reverse = True)
+
     msg = []
     entireNum = sum(list(d.values()))
-    keys = list(d.keys())
+    num = 0
     for j in range(len(d)):
-        name = keys[j]
+        name = sort[j][0]
         percent = percentage(d, name, entireNum)
-        sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
-        msg.append(sentence)
+        if num == 0:
+            sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
+            msg.append(sentence)
+            num += 1
+        else:
+            sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
+            msg.append(sentence)
 
     message = ''
     for k in range(len(msg)):
@@ -54,7 +61,6 @@ def fetch_and_toot(instance):
 
     baseTime = time.strftime('%H:%M', time.localtime(time.time()))
     message += '\n' + str(baseTime) + '(KST) 기준 최근 40툿을 대상으로 측정합니다.'
-
     toot(message, instance)
 
 
