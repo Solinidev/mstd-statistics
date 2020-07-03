@@ -1,6 +1,6 @@
 # mstd-statistics
 <h2>TODO</h2>
-<ul>
+<ol>
 <li>측정하는 범위 확장</li>
-<li>지분이 높은 순서대로 출력</li>
-</ul>
+<li>1번 어케하는지 알아내기</li>
+<ol>
