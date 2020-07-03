@@ -26,17 +26,20 @@ def percentage(dict, name, entireNum):
 
 def fetch_and_toot(instance):
     uri = instance + '/api/v1/timelines/home'
-    timeline = requests.get(uri, headers = headers, params = params).json()
     d = dict()
-    for i in range(len(timeline)):
-        status = timeline[i]
-        if status['reblog'] is None:
-            if status['account']['username'] in d:
-                update(d, status)
+    for i in range(3):
+        timeline = requests.get(uri, headers = headers, params = params).json()
+        for m in range(len(timeline)):
+            status = timeline[m]
+            if status['reblog'] is None:
+                if status['account']['username'] in d:
+                    update(d, status)
+                else:
+                    initial(d, status)
             else:
-                initial(d, status)
-        else:
-            pass
+                pass
+        pointid = timeline[-1]['id']
+        params['max_id'] = pointid
 
     sort = sorted(d.items(), key = lambda k : k[1], reverse = True)
 
@@ -60,7 +63,7 @@ def fetch_and_toot(instance):
         message += append
 
     baseTime = time.strftime('%H:%M', time.localtime(time.time()))
-    message += '\n' + str(baseTime) + '(KST) 기준 최근 40툿을 대상으로 측정합니다.'
+    message += '\n' + str(baseTime) + '(KST) 기준 최근 120툿을 대상으로 측정합니다.'
     toot(message, instance)
 
 
@@ -70,7 +73,7 @@ if __name__ == '__main__':
         acc = f.read().strip()
 
     headers = {'Authorization': 'Bearer ' + acc}
-    params = {'limit': 40}  # 40까지만 먹네?
+    params = {'limit': 40}
 
     instance = 'https://twingyeo.kr'
 
