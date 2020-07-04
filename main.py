@@ -49,13 +49,8 @@ def fetch_and_toot(instance):
     for j in range(len(d)):
         name = sort[j][0]
         percent = percentage(d, name, entireNum)
-        if num == 0:
-            sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
-            msg.append(sentence)
-            num += 1
-        else:
-            sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
-            msg.append(sentence)
+        sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
+        msg.append(sentence)
 
     message = ''
     for k in range(len(msg)):
