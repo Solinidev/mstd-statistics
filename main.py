@@ -24,10 +24,17 @@ def percentage(dict, name, entireNum):
     percent = round(cnt / entireNum * 100, 1)
     return percent
 
-def fetch_and_toot(instance):
+def selectNum(n):
+    for lim in range(40, 0, -10):
+        remain = n % lim
+        if remain == 0:
+            repeat = n / lim
+            return lim, int(repeat)
+
+def fetch_and_toot(instance, repeat, collect):
     uri = instance + '/api/v1/timelines/home'
     d = dict()
-    for i in range(3):
+    for i in range(repeat):
         timeline = requests.get(uri, headers = headers, params = params).json()
         for m in range(len(timeline)):
             status = timeline[m]
@@ -58,7 +65,7 @@ def fetch_and_toot(instance):
         message += append
 
     baseTime = time.strftime('%H:%M', time.localtime(time.time()))
-    message += '\n' + str(baseTime) + '(KST) 기준 최근 120툿을 대상으로 측정합니다.'
+    message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정합니다.'
     toot(message, instance)
 
 
@@ -66,10 +73,13 @@ if __name__ == '__main__':
     base = os.path.dirname(os.path.abspath(__file__)) + '/'
     with open(base + 'acc.txt') as f:
         acc = f.read().strip()
+    
+    collect = 100
+    lim, repeat = selectNum(collect)
 
     headers = {'Authorization': 'Bearer ' + acc}
-    params = {'limit': 40}
+    params = {'limit': lim}
 
     instance = 'https://twingyeo.kr'
 
-    fetch_and_toot(instance)
+    fetch_and_toot(instance, repeat, collect)
