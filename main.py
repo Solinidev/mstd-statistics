@@ -34,7 +34,7 @@ def selectNum(n):
 def fetch_and_toot(instance, repeat, collect):
     uri = instance + '/api/v1/timelines/home'
     d = dict()
-    for i in range(repeat):
+    for _ in range(repeat):
         timeline = requests.get(uri, headers = headers, params = params).json()
         for m in range(len(timeline)):
             status = timeline[m]
@@ -52,12 +52,13 @@ def fetch_and_toot(instance, repeat, collect):
 
     msg = []
     entireNum = sum(list(d.values()))
-    num = 0
     for j in range(len(d)):
         name = sort[j][0]
         percent = percentage(d, name, entireNum)
         sentence = '@ ' + name + ' 님 ' + str(percent) + '%'
         msg.append(sentence)
+        if j == 9:
+            break
 
     message = ''
     for k in range(len(msg)):
@@ -65,13 +66,12 @@ def fetch_and_toot(instance, repeat, collect):
         message += append
 
     baseTime = time.strftime('%H:%M', time.localtime(time.time()))
-    message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정합니다.'
+    message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정한 상위 10명입니다.'
     toot(message, instance)
 
-
 if __name__ == '__main__':
-    base = os.path.dirname(os.path.abspath(__file__)) + '/'
-    with open(base + 'acc.txt') as f:
+    base = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(base, 'acc.txt')) as f:
         acc = f.read().strip()
     
     collect = 100
