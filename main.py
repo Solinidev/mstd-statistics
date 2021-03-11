@@ -66,7 +66,7 @@ def fetch_and_toot(instance, repeat, collect):
         message += append
 
     baseTime = time.strftime('%H:%M', time.localtime(time.time()))
-    message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정한 상위 10명입니다.'
+    message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정한 상위 ' + str(j) + '명입니다.'
     toot(message, instance)
 
 if __name__ == '__main__':
