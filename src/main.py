@@ -2,6 +2,13 @@ import requests
 import os
 import json
 import time
+try:
+    from web.utils import settings
+    acc = settings.access_token
+except:
+    from dotenv import load_dotenv
+    load_dotenv(verbose=True)
+    acc = os.getenv('ACCESS_TOKEN')
 
 def toot(message, instance):
     t = dict()
@@ -69,11 +76,7 @@ def fetch_and_toot(instance, repeat, collect):
     message += '\n' + str(baseTime) + '(KST) 기준 최근 ' + str(collect) + '툿을 대상으로 측정한 상위 ' + str(j+1) + '명입니다.'
     toot(message, instance)
 
-if __name__ == '__main__':
-    base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, 'acc.txt')) as f:
-        acc = f.read().strip()
-    
+if __name__ == '__main__':    
     collect = 100
     lim, repeat = selectNum(collect)
 

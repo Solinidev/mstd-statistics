@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mastodon Statistics</title>
+    <meta charset="UTF-8">
+    <script>
+        let instance = "{{ instance }}";
+        let host = "{{ host }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Mastodon Statistics</h1>
+    <div id="result">
+        {% autoescape false %}
+            {{result}}
+        {% endautoescape %}
+    </div>
+    <br>
+    <button onclick="toot(instance);">툿하기 (새 창에서 열림)</button>
+    <br>
+    <a href="/index">처음으로 돌아가기</a>
+    <br>
+    <br>
+    <a href=#>소스코드</a>
+</body>
+</html>

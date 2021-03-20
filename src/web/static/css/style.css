@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+:root {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    margin: 30px;
+    /* text-align: center; */
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 200px;
+    padding: .6em .5em;
+    margin-bottom: 0.7rem;
+    border: 1px solid #999;
+    border-radius: 4px;
+
+    transition: 0.15s ease-in-out;
+}
+
+select:focus {
+    border-color: #a4d0ff;
+    box-shadow: 0 0 0.5px 1.7px #a4d0ff;
+    box-shadow: 0 0 0 1.7px -moz-mac-focusring;
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: #0d6efd;
+    color: #ffffff;
+
+    margin: 0;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.7rem;
+
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+    width: auto;
+
+    border: none;
+    border-radius: 4px;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    cursor: pointer;
+
+    transition: 0.5s;
+}
+
+button:active,
+button:hover,
+button:focus {
+    background: #025ce2;
+    outline: 0;
+}
+button:disabled {
+    opacity: 0.5;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+div#result {
+    font-size: 18px;
+    line-height: 140%;
+}
+
+/* form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+} */

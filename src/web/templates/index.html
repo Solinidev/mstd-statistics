@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mastodon Statistics</title>
+        <meta charset="utf-8">
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Mastodon Statistics</h1>
+        <div>
+            지분을 계산할 계정이 있는 인스턴스를 선택해주세요. Misskey는 지원하지 않아요.
+        </div>
+        <br>
+        <form method="POST" action="/auth">
+            <select name="instance">
+                <option value="https://twingyeo.kr">트잉여</option>
+                <option value="https://planet.moe">플래닛</option>
+                <option value="https://qdon.space">큐돈</option>
+            </select>
+            <button>로그인</button>
+        </form>
+        <br>
+        <div>
+            최근 100툿 중 부스트한(된) 툿을 제외하여 상위 10명까지 계산해요.
+        </div>
+        <br>
+        <div>
+            허술한 부분이 많아 이상하게 작동할 수 있어요. 혹시 이상한 게 있다면 <a href="https://twingyeo.kr/@solini" target="_blank">저에게</a> 알려주세요. 인스턴스 추가 요청이나 피드백도 좋아요.
+        </div>
+        <br>
+        <br>
+        <a href=#>소스코드</a>
+    </body>
+</html>
