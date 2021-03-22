@@ -6,7 +6,7 @@ def make_app(instance):
     data = {
         "client_name" : "mstd-statistics",
         "redirect_uris" : settings.host + "/r",
-        "scopes" : "read write"
+        "scopes" : "read"
     }
     r = requests.post(instance + '/api/v1/apps', data = data)
     client_id = r.json()['client_id']
@@ -17,7 +17,7 @@ def get_token(instance, client_id, client_secret, code):
     data = {
         "client_id" : client_id,
         "client_secret" : client_secret,
-        "scope" : "read write",
+        "scope" : "read",
         "code" : code,
         "grant_type" : "authorization_code",
         "redirect_uri" : settings.host + "/r"

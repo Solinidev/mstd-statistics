@@ -19,7 +19,7 @@ def index():
 def authorize():
     session['instance'] = request.form['instance']
     session['client_id'], session['client_secret'] = oauth.make_app(session['instance'])
-    return redirect(session['instance'] + '/oauth/authorize?client_id=' + session['client_id'] + '&redirect_uri=' + settings.host + '/r&response_type=code&scope=read%20write')
+    return redirect(session['instance'] + '/oauth/authorize?client_id=' + session['client_id'] + '&redirect_uri=' + settings.host + '/r&response_type=code&scope=read')
 
 @app.route('/r')
 def calc():
