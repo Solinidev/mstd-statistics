@@ -23,6 +23,8 @@ def authorize():
 
 @app.route('/r')
 def calc():
+    if request.args.get('error'):
+        return redirect('/index')
     access_code = request.args.get('code')
     response = oauth.get_token(session['instance'], session['client_id'], session['client_secret'], access_code)
     session['token'] = response.json()['access_token']
