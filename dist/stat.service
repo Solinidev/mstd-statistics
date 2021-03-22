@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve mstd-statistics
+After=network.target
+
+[Service]
+User=
+Group=www-data
+WorkingDirectory=/path/to/your/project
+Environment="PATH=/path/to/your/python/venv/bin"
+ExecStart=/path/to/your/python/venv/bin/gunicorn --workers 5 --bind unix:mstd-statistics.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
