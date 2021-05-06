@@ -32,3 +32,42 @@ def revoke_token(instance, client_id, client_secret, token):
         "token" : token
     }
     requests.post(instance + '/oauth/revoke', data = data)
+
+def make_app_misskey(instance):
+    header = {
+        "content-type" : "application/json"
+    }
+
+    payload = {
+        "name" : "mstd-statistics",
+        "description" : "Calculate who occupies how much",
+        "permission" : [
+            "read:account"
+        ],
+        "callbackUrl" : settings.host + "/r"
+    }
+
+    return requests.post(instance + "/api/app/create", headers = header, data = json.dumps(payload)).json()
+
+def session_gen_misskey(instance, appSecret):
+    header = {
+        "content-type" : "application/json"
+    }
+
+    payload = {
+        "appSecret" : appSecret
+    }
+
+    return requests.post(instance + "/api/auth/session/generate", headers = header, data = json.dumps(payload)).json()
+
+def get_userKey_misskey(instance, appSecret, token):
+    header = {
+        "content-type" : "application/json"
+    }
+
+    payload = {
+        "appSecret" : appSecret,
+        "token" : token
+    }
+
+    return requests.post(instance + "/api/auth/session/userkey", headers = header, data = json.dumps(payload)).json()
