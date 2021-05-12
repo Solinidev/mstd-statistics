@@ -17,7 +17,10 @@ def index():
 
 @app.route('/auth', methods=['POST'])
 def authorize():
-    session['instance'] = request.form['instance']
+    if request.form['instance'][:7] != "https://":
+        session['instance'] = "https://" + request.form['instance']
+    else:
+        session['instance'] = request.form['instance']
     try:
         session['client_id'], session['client_secret'] = oauth.make_app(session['instance'])
         return redirect(session['instance'] + '/oauth/authorize?client_id=' + session['client_id'] + '&redirect_uri=' + settings.host + '/r&response_type=code&scope=read')

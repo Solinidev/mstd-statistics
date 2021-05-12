@@ -12,12 +12,13 @@
         </div>
         <br>
         <form method="POST" action="/auth">
-            <select name="instance">
-                <option value="https://twingyeo.kr">트잉여</option>
-                <option value="https://planet.moe">플래닛</option>
-                <option value="https://qdon.space">큐돈</option>
-                <option value="https://madost.one">마도스톤</option>
-            </select>
+            <input list="instanceList" name="instance" value="twingyeo.kr">
+            <datalist id="instanceList">
+                <option value="twingyeo.kr">
+                <option value="planet.moe">
+                <option value="qdon.space">
+                <option value="madost.one">
+            </datalist>
             <button>로그인</button>
         </form>
         <br>

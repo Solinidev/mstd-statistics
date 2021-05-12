@@ -9,7 +9,7 @@ body {
     /* text-align: center; */
 }
 
-select {
+input {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -23,15 +23,11 @@ select {
     transition: 0.15s ease-in-out;
 }
 
-select:focus {
+input:focus {
     border-color: #a4d0ff;
     box-shadow: 0 0 0.5px 1.7px #a4d0ff;
     box-shadow: 0 0 0 1.7px -moz-mac-focusring;
     outline: none;
-}
-
-select::-ms-expand {
-    display: none;
 }
 
 button {
